@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "activikey-dev": {
+      "hosting": {
+        "activikey": [
+          "activikey-dev"
+        ]
+      }
+    }
+  }
+}
