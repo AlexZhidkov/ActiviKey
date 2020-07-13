@@ -9,11 +9,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material-module';
+import { GymsComponent } from './gyms/gyms.component';
+import { DancesComponent } from './dances/dances.component';
+import { SportComponent } from './sport/sport.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    GymsComponent,
+    DancesComponent,
+    SportComponent
   ],
   imports: [
     BrowserModule,
