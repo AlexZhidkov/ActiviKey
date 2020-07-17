@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Event
+        </mat-card-title>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content *ngIf="!isLoading" class="form-container">
+        <mat-form-field>
+            <input matInput type="text" name="title" placeholder="Title" [ngModel]="(event | async)?.title"
+                (ngModelChange)="eventDoc.update({title: $event})">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let tag of tagList" removable=true (removed)="removeTag(tag)">
+                    {{tag}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New tag..." [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matChipInputAddOnBlur=true
+                    (matChipInputTokenEnd)="addTag($event)">
+            </mat-chip-list>
+        </mat-form-field>
+
+    </mat-card-content>
+</mat-card>

@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./events-management.component.css']
 })
 export class EventsManagementComponent implements OnInit {
+  isLoading = true;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.isLoading = false;
   }
 
 }

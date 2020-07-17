@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-radio-group {
+    display: flex;
+    margin: 15px 0;
+}
+  
+.mat-radio-button {
+    margin: 5px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.form-container > * {
+  width: 100%;
+}
