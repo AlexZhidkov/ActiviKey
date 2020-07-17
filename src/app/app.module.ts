@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material-module';
 import { SportComponent } from './sport/sport.component';
+import { EventsManagementComponent } from './events-management/events-management.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SportComponent } from './sport/sport.component';
     DancesComponent,
     SportComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    EventsManagementComponent
   ],
   imports: [
     BrowserModule,
