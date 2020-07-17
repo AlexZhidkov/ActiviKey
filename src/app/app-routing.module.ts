@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'sport', component: SportComponent },
   { path: 'admin', component: AdminComponent, canActivate: [LoggedInGuard] },
   { path: 'event', component: EventEditComponent, canActivate: [LoggedInGuard] },
+  { path: 'event/:id', component: EventEditComponent, canActivate: [LoggedInGuard] },
   { path: 'events', component: EventsManagementComponent, canActivate: [LoggedInGuard] },
   { path: 'admin/:activity', component: EventsManagementComponent, canActivate: [LoggedInGuard] },
   { path: '**', component: HomeComponent }

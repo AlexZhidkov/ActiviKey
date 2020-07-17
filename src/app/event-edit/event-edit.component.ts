@@ -66,7 +66,4 @@ export class EventEditComponent implements OnInit {
     }
   }
 
-  update(t: any) {
-    debugger;
-  }
 }
