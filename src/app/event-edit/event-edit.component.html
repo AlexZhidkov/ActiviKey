@@ -14,6 +14,10 @@
             <input matInput type="text" name="address" placeholder="Address" [ngModel]="(event | async)?.address"
                 (ngModelChange)="eventDoc.update({address: $event})">
         </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="mapUrl" placeholder="Link to Google Maps"
+                [ngModel]="(event | async)?.mapUrl" (ngModelChange)="eventDoc.update({mapUrl: $event})">
+        </mat-form-field>
         <mat-form-field class="time">
             <input type="time" matInput placeholder="Start Time" [ngModel]="(event | async)?.startTime" name="startTime"
                 (ngModelChange)="eventDoc.update({startTime: $event})">

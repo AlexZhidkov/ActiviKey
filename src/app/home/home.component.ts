@@ -21,4 +21,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
   }
 
+  openGoogleMap(url: string): void {
+    window.location.href = url;
+  }
 }
