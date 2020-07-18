@@ -14,8 +14,12 @@
             <input matInput type="text" name="address" placeholder="Address" [ngModel]="(event | async)?.address"
                 (ngModelChange)="eventDoc.update({address: $event})">
         </mat-form-field>
+        <mat-form-field class="time">
+            <input type="time" matInput placeholder="Start Time" [ngModel]="(event | async)?.startTime" name="startTime"
+                (ngModelChange)="eventDoc.update({startTime: $event})">
+        </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="address" placeholder="Image URL" [ngModel]="(event | async)?.imageUrl"
+            <input matInput type="text" name="image" placeholder="Image URL" [ngModel]="(event | async)?.imageUrl"
                 (ngModelChange)="eventDoc.update({imageUrl: $event})">
         </mat-form-field>
         <mat-form-field>
