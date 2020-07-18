@@ -10,7 +10,19 @@
             <input matInput type="text" name="title" placeholder="Title" [ngModel]="(event | async)?.title"
                 (ngModelChange)="eventDoc.update({title: $event})">
         </mat-form-field>
-
+        <mat-form-field>
+            <input matInput type="text" name="address" placeholder="Address" [ngModel]="(event | async)?.address"
+                (ngModelChange)="eventDoc.update({address: $event})">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="address" placeholder="Image URL" [ngModel]="(event | async)?.imageUrl"
+                (ngModelChange)="eventDoc.update({imageUrl: $event})">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput rows="5" name="description" placeholder="Description"
+                [ngModel]="(event | async)?.description" (ngModelChange)="eventDoc.update({description: $event})">
+                </textarea>
+        </mat-form-field>
         <mat-form-field>
             <mat-chip-list #chipList>
                 <mat-chip *ngFor="let tag of tagList" removable=true (removed)="removeTag(tag)">
