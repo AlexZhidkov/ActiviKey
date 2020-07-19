@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+import * as geofirestore from 'geofirestore';
 import { Observable } from 'rxjs';
 import { Event } from '../model/event';
 
@@ -29,12 +32,22 @@ export class EventEditComponent implements OnInit {
     this.eventId = this.route.snapshot.paramMap.get('id');
     if (!this.eventId) {
       this.eventId = this.afs.createId();
+      /*
       this.afs.collection('events')
         .doc(this.eventId)
         .set({
           tags: []
         });
+      */
+      const GeoFirestore = geofirestore.initializeApp(firebase.firestore());
+      GeoFirestore.collection('events')
+        .doc(this.eventId)
+        .set({
+          coordinates: new firebase.firestore.GeoPoint(40.7589, -73.9851),
+          tags: []
+        });
     }
+
     this.eventDoc = this.afs.collection('events').doc(this.eventId);
     this.event = this.eventDoc.valueChanges();
     this.event.subscribe(b => {
