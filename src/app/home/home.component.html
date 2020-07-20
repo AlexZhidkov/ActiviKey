@@ -12,9 +12,9 @@
         <mat-card-title>
             {{event.title}}
         </mat-card-title>
-        <mat-card-subtitle (click)="openGoogleMap(event.mapUrl)">
+        <mat-card-subtitle (click)="openGoogleMap(event.placeId)">
             <mat-icon>location_on</mat-icon>
-            {{event.address}}
+            {{event.placeName}}
         </mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="event.imageUrl" alt="image">

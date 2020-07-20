@@ -1,5 +1,8 @@
+/// <reference types='@types/googlemaps' />
+declare var google: any;
+
 import { ENTER } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +17,8 @@ import { Event } from '../model/event';
   templateUrl: './event-edit.component.html',
   styleUrls: ['./event-edit.component.css']
 })
-export class EventEditComponent implements OnInit {
+export class EventEditComponent implements OnInit, AfterViewInit {
+  @ViewChild('addressInput', { static: false }) addressInput: any;
 
   isLoading = true;
   eventId: string;
@@ -32,18 +36,9 @@ export class EventEditComponent implements OnInit {
     this.eventId = this.route.snapshot.paramMap.get('id');
     if (!this.eventId) {
       this.eventId = this.afs.createId();
-      /*
       this.afs.collection('events')
         .doc(this.eventId)
         .set({
-          tags: []
-        });
-      */
-      const GeoFirestore = geofirestore.initializeApp(firebase.firestore());
-      GeoFirestore.collection('events')
-        .doc(this.eventId)
-        .set({
-          coordinates: new firebase.firestore.GeoPoint(40.7589, -73.9851),
           tags: []
         });
     }
@@ -55,6 +50,34 @@ export class EventEditComponent implements OnInit {
       this.isLoading = false;
     });
   }
+
+  ngAfterViewInit(): void {
+    this.setupPlacesAutocomplete();
+  }
+
+  private setupPlacesAutocomplete(): void {
+    // https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+    const options = {
+      componentRestrictions: { country: 'AU' },
+      fields: ['name', 'formatted_address', 'place_id', 'geometry.location']
+    };
+
+    const addressAutocomplete = new google.maps.places.Autocomplete(this.addressInput.nativeElement, options);
+    addressAutocomplete.addListener('place_changed', () => {
+      const place = addressAutocomplete.getPlace();
+      const GeoFirestore = geofirestore.initializeApp(firebase.firestore());
+      GeoFirestore.collection('events')
+        .doc(this.eventId)
+        .update({
+          placeId: place.place_id,
+          placeName: place.name,
+          address: place.formatted_address,
+          coordinates: new firebase.firestore.GeoPoint(place.geometry.location.lat(), place.geometry.location.lng())
+        });
+    });
+
+  }
+
 
   addTag(event: MatChipInputEvent): void {
     const input = event.input;

@@ -1,8 +1,10 @@
 export interface Event {
     id: string;
     title: string;
+    placeId: string;
+    placeName: string;
     address: string;
-    mapUrl: string;
+    coordinates: firebase.firestore.GeoPoint;
     startTime: string;
     description: string;
     imageUrl: string;
