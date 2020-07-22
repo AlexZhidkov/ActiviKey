@@ -12,26 +12,26 @@ import { environment } from '../environments/environment';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DancesComponent } from './dances/dances.component';
+import { CalendarListComponent } from './calendar-list/calendar-list.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventsManagementComponent } from './events-management/events-management.component';
-import { GymsComponent } from './gyms/gyms.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material-module';
-import { SportComponent } from './sport/sport.component';
+import { PartnersListComponent } from './partners-list/partners-list.component';
+import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GymsComponent,
-    DancesComponent,
-    SportComponent,
     AdminComponent,
     LoginComponent,
     EventsManagementComponent,
-    EventEditComponent
+    EventEditComponent,
+    PartnersListComponent,
+    CalendarListComponent,
+    WeeklyEventsListComponent
   ],
   imports: [
     BrowserModule,
