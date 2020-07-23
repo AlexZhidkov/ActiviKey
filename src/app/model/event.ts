@@ -8,5 +8,6 @@ export interface Event {
     startTime: string;
     description: string;
     imageUrl: string;
+    weekDay: string;
     tags: string[];
 }

@@ -1,1 +1,8 @@
-<p>weekly-events-list works!</p>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="!isLoading">
+    <div *ngFor="let weekDay of weeklyEvents">
+        <h1>{{weekDay.day}}</h1>
+        <p *ngIf="weekDay.events.length === 0">Not found any events matching your filter.</p>
+        <app-event-card *ngFor="let event of weekDay.events" [event]="event"></app-event-card>
+    </div>
+</div>

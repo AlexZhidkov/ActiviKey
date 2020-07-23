@@ -13,6 +13,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalendarListComponent } from './calendar-list/calendar-list.component';
+import { EventCardComponent } from './event-card/event-card.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventsManagementComponent } from './events-management/events-management.component';
 import { HomeComponent } from './home/home.component';
@@ -31,7 +32,8 @@ import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-li
     EventEditComponent,
     PartnersListComponent,
     CalendarListComponent,
-    WeeklyEventsListComponent
+    WeeklyEventsListComponent,
+    EventCardComponent
   ],
   imports: [
     BrowserModule,
