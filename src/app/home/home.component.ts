@@ -20,8 +20,4 @@ export class HomeComponent implements OnInit {
     this.events = this.eventsCollection.valueChanges({ idField: 'id' });
     this.isLoading = false;
   }
-
-  openGoogleMap(placeId: string): void {
-    window.location.href = `https://www.google.com/maps/place/?q=place_id:${placeId}`;
-  }
 }
