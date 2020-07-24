@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-import * as geofirestore from 'geofirestore';
+import { AppService } from '../app.service';
 import { Event } from '../model/event';
 
 interface WeeklyEvent {
@@ -18,27 +16,21 @@ export class WeeklyEventsListComponent implements OnInit {
   isLoading: boolean;
   weeklyEvents: WeeklyEvent[];
 
-  constructor() { }
+  constructor(private service: AppService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.weeklyEvents = [
-      { day: 'Monday', events: [] },
-      { day: 'Tuesday', events: [] },
-      { day: 'Wednesday', events: [] },
-      { day: 'Thursday', events: [] },
-      { day: 'Friday', events: [] },
-      { day: 'Saturday', events: [] },
-      { day: 'Sunday', events: [] }
-    ];
-    const GeoFirestore = geofirestore.initializeApp(firebase.firestore());
-    const myLocation = new firebase.firestore.GeoPoint(-32.0397559, 115.6813467); // Perth
-    const geoCollection = GeoFirestore.collection('events');
-    const query = geoCollection.near({ center: myLocation, radius: 1000 });
-
-    query.get().then((value) => {
-      value.docs.forEach(doc => {
-        const event = doc.data();
+    this.service.getNearbyEvents().then(nearbyEvents => {
+      this.weeklyEvents = [
+        { day: 'Monday', events: [] },
+        { day: 'Tuesday', events: [] },
+        { day: 'Wednesday', events: [] },
+        { day: 'Thursday', events: [] },
+        { day: 'Friday', events: [] },
+        { day: 'Saturday', events: [] },
+        { day: 'Sunday', events: [] }
+      ];
+      nearbyEvents.forEach(event => {
         if (event.weekDay) {
           this.weeklyEvents[event.weekDay].events.push(event);
         }
@@ -47,5 +39,4 @@ export class WeeklyEventsListComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }

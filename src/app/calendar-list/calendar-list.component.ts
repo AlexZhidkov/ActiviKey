@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-import * as geofirestore from 'geofirestore';
+import { AppService } from '../app.service';
 import { Event } from '../model/event';
 
 interface CalendarEvent {
@@ -19,7 +17,7 @@ export class CalendarListComponent implements OnInit {
   isLoading: boolean;
   calendarEvents: Event[];
 
-  constructor() { }
+  constructor(private service: AppService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -29,17 +27,8 @@ export class CalendarListComponent implements OnInit {
     if (weekday < 0) {
       weekday = 6;
     }
-    const GeoFirestore = geofirestore.initializeApp(firebase.firestore());
-    const myLocation = new firebase.firestore.GeoPoint(-32.0397559, 115.6813467); // Perth
-    const geoCollection = GeoFirestore.collection('events');
-    const query = geoCollection.near({ center: myLocation, radius: 1000 });
-
-    query.get().then((value) => {
-      value.docs.forEach(doc => {
-        const event = doc.data();
-        if (event.date) {
-          event.date = event.date.toDate();
-        }
+    this.service.getNearbyEvents().then(nearbyEvents => {
+      nearbyEvents.forEach(event => {
         let addDays: number;
         if (!event.date && event.weekDay) {
           addDays = 0;

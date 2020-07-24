@@ -9,6 +9,6 @@ export interface Event {
     description: string;
     imageUrl: string;
     date?: Date;
-    weekDay: string;
+    weekDay: number;
     tags: string[];
 }
