@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import * as geofirestore from 'geofirestore';
@@ -14,7 +15,8 @@ export class AppService {
 
   constructor(
     private afs: AngularFirestore,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private router: Router
   ) { }
 
   getSettings(): Promise<UserSettings> {
@@ -38,6 +40,9 @@ export class AppService {
   getNearbyEvents(): Promise<Event[]> {
     const promise = new Promise<Event[]>((resolve, reject) => {
       this.getSettings().then(settings => {
+        if (!(settings.location && settings.radius)) {
+          this.router.navigate(['settings']);
+        }
         const GeoFirestore = geofirestore.initializeApp(firebase.firestore());
         const geoCollection = GeoFirestore.collection('events');
         const query = geoCollection.near({ center: settings.location, radius: settings.radius });
