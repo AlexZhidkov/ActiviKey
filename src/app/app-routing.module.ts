@@ -8,10 +8,12 @@ import { EventsManagementComponent } from './events-management/events-management
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PartnersListComponent } from './partners-list/partners-list.component';
+import { SettingsComponent } from './settings/settings.component';
 import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'settings', component: SettingsComponent, canActivate: [LoggedInGuard] },
   { path: 'partners', component: PartnersListComponent },
   { path: 'calendar', component: CalendarListComponent },
   { path: 'weekly', component: WeeklyEventsListComponent },

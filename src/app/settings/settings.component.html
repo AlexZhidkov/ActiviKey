@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Settings
+        </mat-card-title>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content class="form-container" *ngIf="!isLoading">
+        <mat-form-field>
+            <input matInput #locationInput placeholder="My Location" name="location"
+                [ngModel]="(settings | async).region" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Distance</mat-label>
+            <mat-select (selectionChange)="settingsDoc.update({radius: $event.value})"
+                [ngModel]="(settings | async).radius">
+                <mat-option [value]=10> 10 km </mat-option>
+                <mat-option [value]=20> 20 km </mat-option>
+                <mat-option [value]=50> 50 km </mat-option>
+                <mat-option [value]=1000> 1000 km </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card-content>
+</mat-card>

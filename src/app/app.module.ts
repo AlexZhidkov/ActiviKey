@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material-module';
 import { PartnersListComponent } from './partners-list/partners-list.component';
+import { SettingsComponent } from './settings/settings.component';
 import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-list.component';
 
 @NgModule({
@@ -33,7 +34,8 @@ import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-li
     PartnersListComponent,
     CalendarListComponent,
     WeeklyEventsListComponent,
-    EventCardComponent
+    EventCardComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
