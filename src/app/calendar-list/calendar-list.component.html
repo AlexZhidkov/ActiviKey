@@ -1,1 +1,7 @@
-<p>calendar-list works!</p>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="!isLoading">
+    <div *ngFor="let event of calendarEvents">
+        <h1>{{event.date.toDateString()}}</h1>
+        <app-event-card [event]="event"></app-event-card>
+    </div>
+</div>
