@@ -1,0 +1,41 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Partner
+        </mat-card-title>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content class="form-container">
+        <mat-form-field>
+            <input matInput type="text" name="title" placeholder="Title" [ngModel]="(partner | async)?.title"
+                (ngModelChange)="partnerDoc.update({title: $event})">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput #addressInput placeholder="Address" name="address"
+                [ngModel]="(partner | async)?.placeName" />
+        </mat-form-field>
+        {{(partner | async)?.address}}
+
+        <mat-form-field>
+            <input matInput type="text" name="image" placeholder="Image URL" [ngModel]="(partner | async)?.imageUrl"
+                (ngModelChange)="partnerDoc.update({imageUrl: $event})">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput rows="5" name="description" placeholder="Description"
+                [ngModel]="(partner | async)?.description" (ngModelChange)="partnerDoc.update({description: $event})">
+                </textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let tag of tagList" removable=true (removed)="removeTag(tag)">
+                    {{tag}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New tag..." [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matChipInputAddOnBlur=true
+                    (matChipInputTokenEnd)="addTag($event)">
+            </mat-chip-list>
+        </mat-form-field>
+
+    </mat-card-content>
+</mat-card>

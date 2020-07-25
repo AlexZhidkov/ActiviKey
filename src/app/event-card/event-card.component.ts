@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 import { Event } from '../model/event';
 
 @Component({
@@ -9,12 +10,8 @@ import { Event } from '../model/event';
 export class EventCardComponent implements OnInit {
   @Input() event: Event;
 
-  constructor() { }
+  constructor(public service: AppService) { }
 
   ngOnInit(): void {
-  }
-
-  openGoogleMap(placeId: string): void {
-    window.location.href = `https://www.google.com/maps/place/?q=place_id:${placeId}`;
   }
 }

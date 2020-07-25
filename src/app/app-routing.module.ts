@@ -7,6 +7,7 @@ import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventsManagementComponent } from './events-management/events-management.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PartnerEditComponent } from './partner-edit/partner-edit.component';
 import { PartnersListComponent } from './partners-list/partners-list.component';
 import { SettingsComponent } from './settings/settings.component';
 import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-list.component';
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [LoggedInGuard] },
   { path: 'event', component: EventEditComponent, canActivate: [LoggedInGuard] },
   { path: 'event/:id', component: EventEditComponent, canActivate: [LoggedInGuard] },
+  { path: 'partner', component: PartnerEditComponent, canActivate: [LoggedInGuard] },
+  { path: 'partner/:id', component: PartnerEditComponent, canActivate: [LoggedInGuard] },
   { path: 'events', component: EventsManagementComponent, canActivate: [LoggedInGuard] },
   { path: 'admin/:activity', component: EventsManagementComponent, canActivate: [LoggedInGuard] },
   { path: '**', component: HomeComponent }

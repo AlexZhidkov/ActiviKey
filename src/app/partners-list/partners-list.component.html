@@ -1,1 +1,10 @@
-<p>partners-list works!</p>
+<div>
+    <h1>Partners</h1>
+    <span fxFlex></span>
+    <button mat-mini-fab routerLink="/partner">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+<app-partner-card *ngFor="let partner of partners | async" [partner]="partner"></app-partner-card>

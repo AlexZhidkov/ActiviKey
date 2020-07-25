@@ -20,6 +20,10 @@ export class AppService {
     private router: Router
   ) { }
 
+  openGoogleMap(placeId: string): void {
+    window.location.href = `https://www.google.com/maps/place/?q=place_id:${placeId}`;
+  }
+
   getSettings(): Promise<UserSettings> {
     const promise = new Promise<UserSettings>((resolve, reject) => {
       this.auth.user.subscribe(user => {

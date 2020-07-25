@@ -19,6 +19,8 @@ import { EventsManagementComponent } from './events-management/events-management
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material-module';
+import { PartnerCardComponent } from './partner-card/partner-card.component';
+import { PartnerEditComponent } from './partner-edit/partner-edit.component';
 import { PartnersListComponent } from './partners-list/partners-list.component';
 import { SettingsComponent } from './settings/settings.component';
 import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-list.component';
@@ -35,7 +37,9 @@ import { WeeklyEventsListComponent } from './weekly-events-list/weekly-events-li
     CalendarListComponent,
     WeeklyEventsListComponent,
     EventCardComponent,
-    SettingsComponent
+    SettingsComponent,
+    PartnerEditComponent,
+    PartnerCardComponent
   ],
   imports: [
     BrowserModule,

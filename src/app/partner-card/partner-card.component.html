@@ -1,16 +1,16 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            {{event.title}}
+            {{partner.title}}
         </mat-card-title>
-        <mat-card-subtitle (click)="service.openGoogleMap(event.placeId)">
+        <mat-card-subtitle (click)="service.openGoogleMap(partner.placeId)">
             <mat-icon>location_on</mat-icon>
-            {{event.placeName}}
+            {{partner.placeName}}
         </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="event.imageUrl" alt="image">
+    <img mat-card-image [src]="partner.imageUrl" alt="image">
     <mat-card-content>
-        <p>{{event.description}}</p>
+        <p>{{partner.description}}</p>
     </mat-card-content>
     <mat-card-actions>
         <button mat-button>Register</button>
@@ -18,7 +18,7 @@
         <button mat-icon-button>
             <mat-icon>favorite</mat-icon>
         </button>
-        <button mat-icon-button routerLink="/event/{{event.id}}">
+        <button mat-icon-button routerLink="/partner/{{partner.id}}">
             <mat-icon>edit</mat-icon>
         </button>
     </mat-card-actions>
