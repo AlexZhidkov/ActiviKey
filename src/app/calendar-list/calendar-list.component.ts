@@ -4,7 +4,6 @@ import { Event } from '../model/event';
 
 interface CalendarEvent {
   day: Date;
-  weekday: string;
   events: Event[];
 }
 
@@ -23,19 +22,19 @@ export class CalendarListComponent implements OnInit {
     this.isLoading = true;
     this.calendarEvents = [];
     const today = new Date();
-    let weekday = today.getDay() - 1;
-    if (weekday < 0) {
-      weekday = 6;
+    let dayOfWeek = today.getDay() - 1;
+    if (dayOfWeek < 0) {
+      dayOfWeek = 6;
     }
     this.service.getNearbyEvents().then(nearbyEvents => {
       nearbyEvents.forEach(event => {
         let addDays: number;
-        if (!event.date && event.weekDay) {
+        if (!event.date && event.dayOfWeek) {
           addDays = 0;
-          if (event.weekDay >= weekday) {
-            addDays = event.weekDay - weekday;
+          if (event.dayOfWeek >= dayOfWeek) {
+            addDays = event.dayOfWeek - dayOfWeek;
           } else {
-            addDays = weekday - event.weekDay + 5;
+            addDays = dayOfWeek - event.dayOfWeek + 5;
           }
           if (!isNaN(addDays)) {
             event.date = new Date();
@@ -57,7 +56,7 @@ export class CalendarListComponent implements OnInit {
           this.calendarEvents.push(event);
         }
       });
-      this.calendarEvents.sort((a, b) => (a.date.getTime() - b.date.getTime()));
+      this.calendarEvents.sort((a, b) => ((a.date as Date).getTime() - (b.date as Date).getTime()));
       this.isLoading = false;
     });
   }

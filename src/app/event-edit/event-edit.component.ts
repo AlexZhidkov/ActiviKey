@@ -10,6 +10,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import * as geofirestore from 'geofirestore';
 import { Observable } from 'rxjs';
+import { AppService } from '../app.service';
 import { Event } from '../model/event';
 
 @Component({
@@ -22,6 +23,7 @@ export class EventEditComponent implements OnInit, AfterViewInit {
 
   isLoading = true;
   eventId: string;
+  eventDate: Date;
   eventDoc: AngularFirestoreDocument<Event>;
   event: Observable<Event>;
   tagList: string[];
@@ -30,6 +32,7 @@ export class EventEditComponent implements OnInit, AfterViewInit {
   constructor(
     private afs: AngularFirestore,
     private route: ActivatedRoute,
+    public service: AppService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +42,8 @@ export class EventEditComponent implements OnInit, AfterViewInit {
       this.afs.collection('events')
         .doc(this.eventId)
         .set({
+          occurrence: 'weekly',
+          dayOfWeek: (new Date()).getDay() - 1,
           tags: []
         });
     }
@@ -46,6 +51,9 @@ export class EventEditComponent implements OnInit, AfterViewInit {
     this.eventDoc = this.afs.collection('events').doc(this.eventId);
     this.event = this.eventDoc.valueChanges();
     this.event.subscribe(b => {
+      if (b.date) {
+        this.eventDate = (b.date as firebase.firestore.Timestamp).toDate();
+      }
       this.tagList = b.tags;
       this.isLoading = false;
     });
@@ -75,9 +83,11 @@ export class EventEditComponent implements OnInit, AfterViewInit {
           coordinates: new firebase.firestore.GeoPoint(place.geometry.location.lat(), place.geometry.location.lng())
         });
     });
-
   }
 
+  updateEventDate(date: Date): void {
+    this.eventDoc.update({ date, dayOfWeek: date.getDay() - 1 });
+  }
 
   addTag(event: MatChipInputEvent): void {
     const input = event.input;

@@ -12,6 +12,7 @@ import { UserSettings } from './model/user-settings';
   providedIn: 'root'
 })
 export class AppService {
+  public daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   constructor(
     private afs: AngularFirestore,

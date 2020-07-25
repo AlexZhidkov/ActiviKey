@@ -31,8 +31,8 @@ export class WeeklyEventsListComponent implements OnInit {
         { day: 'Sunday', events: [] }
       ];
       nearbyEvents.forEach(event => {
-        if (event.weekDay) {
-          this.weeklyEvents[event.weekDay].events.push(event);
+        if (event.dayOfWeek) {
+          this.weeklyEvents[event.dayOfWeek].events.push(event);
         }
       });
       this.weeklyEvents.forEach(weekly => weekly.events.sort((a, b) => b.startTime.localeCompare(a.startTime)));
