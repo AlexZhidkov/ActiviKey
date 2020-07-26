@@ -4,6 +4,8 @@ import 'firebase/firestore';
 export interface Event {
     id: string;
     title: string;
+    partner: string;
+    partnerId: string;
     placeId: string;
     placeName: string;
     address: string;

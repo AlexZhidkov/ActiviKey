@@ -13,7 +13,8 @@
         <p>{{partner.description}}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>Register</button>
+        <mat-slide-toggle [(ngModel)]="showEvents" (change)="eventsToggleChanged($event.checked)">Events
+        </mat-slide-toggle>
         <span fxFlex></span>
         <button mat-icon-button>
             <mat-icon>favorite</mat-icon>
@@ -23,3 +24,7 @@
         </button>
     </mat-card-actions>
 </mat-card>
+
+<div *ngIf="showEvents">
+    <app-event-card *ngFor="let event of events | async" [event]="event"></app-event-card>
+</div>
