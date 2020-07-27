@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import * as geofirestore from 'geofirestore';
+import { Observable } from 'rxjs';
 import { Event } from './model/event';
 import { UserSettings } from './model/user-settings';
 
@@ -22,6 +23,11 @@ export class AppService {
 
   openGoogleMap(placeId: string): void {
     window.location.href = `https://www.google.com/maps/place/?q=place_id:${placeId}`;
+  }
+
+  getEvents(partnerId): Observable<Event[]> {
+    const eventsCollection = this.afs.collection<Event>('events', ref => ref.where('partnerId', '==', partnerId));
+    return eventsCollection.valueChanges({ idField: 'id' });
   }
 
   getSettings(): Promise<UserSettings> {

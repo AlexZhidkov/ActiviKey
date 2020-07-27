@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppService } from '../app.service';
 import { Event } from '../model/event';
@@ -16,8 +15,7 @@ export class PartnerCardComponent implements OnInit {
   events: Observable<Event[]>;
 
   constructor(
-    public service: AppService,
-    private afs: AngularFirestore
+    public service: AppService
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +24,7 @@ export class PartnerCardComponent implements OnInit {
 
   eventsToggleChanged(isChecked: any): void {
     if (isChecked) {
-      this.getEvents();
+      this.events = this.service.getEvents(this.partner.id);
     }
-  }
-
-  getEvents(): void {
-    const eventsCollection = this.afs.collection<Event>('events', ref => ref.where('partnerId', '==', this.partner.id));
-    this.events = eventsCollection.valueChanges();
   }
 }

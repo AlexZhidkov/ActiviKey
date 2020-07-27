@@ -38,10 +38,14 @@ export class EventEditComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id');
     if (!this.eventId) {
+      const partner = this.route.snapshot.queryParamMap.get('partner');
+      const partnerId = this.route.snapshot.queryParamMap.get('id');
       this.eventId = this.afs.createId();
       this.afs.collection('events')
         .doc(this.eventId)
         .set({
+          partner,
+          partnerId,
           occurrence: 'weekly',
           dayOfWeek: (new Date()).getDay() - 1,
           tags: []

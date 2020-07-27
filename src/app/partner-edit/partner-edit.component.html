@@ -39,3 +39,12 @@
 
     </mat-card-content>
 </mat-card>
+
+<div>
+    <h1>Events</h1>
+    <span fxFlex></span>
+    <button mat-mini-fab routerLink="/event" [queryParams]="{partner: (partner | async)?.title, id: partnerId}">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+<app-event-card *ngFor="let event of events | async" [event]="event"></app-event-card>

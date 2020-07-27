@@ -11,6 +11,7 @@ import 'firebase/firestore';
 import * as geofirestore from 'geofirestore';
 import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
+import { Event } from '../model/event';
 import { Partner } from '../model/partner';
 
 @Component({
@@ -27,6 +28,7 @@ export class PartnerEditComponent implements OnInit, AfterViewInit {
   partnerDoc: AngularFirestoreDocument<Partner>;
   partner: Observable<Partner>;
   tagList: string[];
+  events: Observable<Event[]>;
   readonly separatorKeysCodes: number[] = [ENTER];
 
   constructor(
@@ -52,6 +54,7 @@ export class PartnerEditComponent implements OnInit, AfterViewInit {
       this.tagList = b.tags;
       this.isLoading = false;
     });
+    this.events = this.service.getEvents(this.partnerId);
   }
 
   ngAfterViewInit(): void {
