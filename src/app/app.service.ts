@@ -60,6 +60,7 @@ export class AppService {
         query.get().then((value) => {
           const events = value.docs.map(e => {
             const event = e.data();
+            event.id = e.id;
             if (event.date) {
               event.date = event.date.toDate();
             }
