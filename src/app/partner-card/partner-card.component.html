@@ -16,6 +16,9 @@
         <mat-slide-toggle [(ngModel)]="showEvents" (change)="eventsToggleChanged($event.checked)">Events
         </mat-slide-toggle>
         <span fxFlex></span>
+        <a mat-icon-button *ngIf="partner.website" [href]="partner.website">
+            <mat-icon>public</mat-icon>
+        </a>
         <button mat-icon-button>
             <mat-icon>favorite</mat-icon>
         </button>

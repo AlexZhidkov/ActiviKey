@@ -26,6 +26,10 @@
                 </textarea>
         </mat-form-field>
         <mat-form-field>
+            <input matInput type="text" name="website" placeholder="Website" [ngModel]="(partner | async)?.website"
+                (ngModelChange)="partnerDoc.update({website: $event})">
+        </mat-form-field>
+        <mat-form-field>
             <mat-chip-list #chipList>
                 <mat-chip *ngFor="let tag of tagList" removable=true (removed)="removeTag(tag)">
                     {{tag}}
