@@ -14,4 +14,9 @@ export class EventCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  favoriteClicked(): void {
+    this.event.isFavorite = !this.event.isFavorite;
+    this.service.setFavorite(this.event);
+  }
 }

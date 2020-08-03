@@ -16,5 +16,6 @@ export interface Event {
     imageUrl: string;
     date?: Date | firebase.firestore.Timestamp;
     dayOfWeek: number;
+    isFavorite?: boolean;
     tags: string[];
 }

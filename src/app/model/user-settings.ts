@@ -4,4 +4,5 @@ export interface UserSettings {
     region: string;
     location: firebase.firestore.GeoPoint;
     radius: number;
+    favorites: string[];
 }

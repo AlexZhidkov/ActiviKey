@@ -30,6 +30,26 @@ export class AppService {
     return eventsCollection.valueChanges({ idField: 'id' });
   }
 
+  setFavorite(event: Event): void {
+    this.auth.user.subscribe(user => {
+      const settingsDoc = this.afs.doc<any>(`users/${user.uid}`);
+      settingsDoc.get().subscribe(doc => {
+        const favorites = doc.data().favorites ?? [];
+        if (event.isFavorite) {
+          if (!favorites.includes(event.id)) {
+            favorites.push(event.id);
+          }
+        } else {
+          const index = favorites.indexOf(event.id);
+          if (index > -1) {
+            favorites.splice(index, 1);
+          }
+        }
+        settingsDoc.update({ favorites });
+      });
+    });
+  }
+
   getSettings(): Promise<UserSettings> {
     const promise = new Promise<UserSettings>((resolve, reject) => {
       this.auth.user.subscribe(user => {
@@ -39,7 +59,8 @@ export class AppService {
           const settings: UserSettings = {
             region: data.region,
             location: data.location,
-            radius: data.radius
+            radius: data.radius,
+            favorites: data.favorites
           };
           resolve(settings);
         });
