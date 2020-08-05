@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { Event } from '../model/event';
+import { EventData } from '../model/event';
 
 interface CalendarEvent {
   day: Date;
-  events: Event[];
+  events: EventData[];
 }
 
 @Component({
@@ -14,7 +14,7 @@ interface CalendarEvent {
 })
 export class CalendarListComponent implements OnInit {
   isLoading: boolean;
-  calendarEvents: Event[];
+  calendarEvents: EventData[];
 
   constructor(private service: AppService) { }
 

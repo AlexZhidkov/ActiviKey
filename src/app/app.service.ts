@@ -6,7 +6,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import * as geofirestore from 'geofirestore';
 import { Observable } from 'rxjs';
-import { Event } from './model/event';
+import { EventData, MyEvent } from './model/event';
 import { UserSettings } from './model/user-settings';
 
 @Injectable({
@@ -25,12 +25,12 @@ export class AppService {
     window.location.href = `https://www.google.com/maps/place/?q=place_id:${placeId}`;
   }
 
-  getEvents(partnerId): Observable<Event[]> {
-    const eventsCollection = this.afs.collection<Event>('events', ref => ref.where('partnerId', '==', partnerId));
+  getEvents(partnerId): Observable<EventData[]> {
+    const eventsCollection = this.afs.collection<EventData>('events', ref => ref.where('partnerId', '==', partnerId));
     return eventsCollection.valueChanges({ idField: 'id' });
   }
 
-  setFavorite(event: Event): void {
+  setFavorite(event: MyEvent): void {
     this.auth.user.subscribe(user => {
       const settingsDoc = this.afs.doc<any>(`users/${user.uid}`);
       settingsDoc.get().subscribe(doc => {
@@ -48,6 +48,9 @@ export class AppService {
         settingsDoc.update({ favorites });
       });
     });
+  }
+
+  registerForEvent(event: MyEvent): void {
   }
 
   getSettings(): Promise<UserSettings> {
@@ -69,8 +72,8 @@ export class AppService {
     return promise;
   }
 
-  getNearbyEvents(): Promise<Event[]> {
-    const promise = new Promise<Event[]>((resolve, reject) => {
+  getNearbyEvents(): Promise<EventData[]> {
+    const promise = new Promise<EventData[]>((resolve, reject) => {
       this.getSettings().then(settings => {
         if (!(settings.location && settings.radius)) {
           this.router.navigate(['settings']);

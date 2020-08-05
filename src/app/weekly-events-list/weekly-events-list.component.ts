@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { Event } from '../model/event';
+import { EventData } from '../model/event';
 
 interface WeeklyEvent {
   day: string;
-  events: Event[];
+  events: EventData[];
 }
 
 @Component({

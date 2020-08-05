@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AppService } from '../app.service';
-import { Event } from '../model/event';
+import { MyEvent } from '../model/event';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { Event } from '../model/event';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  favorites: Event[];
+  favorites: MyEvent[];
 
   constructor(
     private service: AppService,
@@ -25,15 +25,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getFavorites(ids: string[]): Promise<Event[]> {
+  getFavorites(ids: string[]): Promise<MyEvent[]> {
     const eventsRef = this.afs.collection('events');
-    const promise = new Promise<Event[]>(async (resolve, reject) => {
-      let events: Event[];
+    const promise = new Promise<MyEvent[]>(async (resolve, reject) => {
+      let events: MyEvent[];
       try {
         events = (await Promise.all(ids.map(id => eventsRef.doc(id).get().toPromise())))
           .filter(doc => doc.exists)
           .map(doc => {
-            const event = doc.data() as Event;
+            const event = doc.data() as MyEvent;
             event.id = doc.id;
             event.isFavorite = true;
             return event;

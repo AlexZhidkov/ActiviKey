@@ -11,7 +11,7 @@ import 'firebase/firestore';
 import * as geofirestore from 'geofirestore';
 import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
-import { Event } from '../model/event';
+import { EventData } from '../model/event';
 
 @Component({
   selector: 'app-event-edit',
@@ -24,8 +24,8 @@ export class EventEditComponent implements OnInit, AfterViewInit {
   isLoading = true;
   eventId: string;
   eventDate: Date;
-  eventDoc: AngularFirestoreDocument<Event>;
-  event: Observable<Event>;
+  eventDoc: AngularFirestoreDocument<EventData>;
+  event: Observable<EventData>;
   tagList: string[];
   readonly separatorKeysCodes: number[] = [ENTER];
 

@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
-export interface Event {
+export interface EventData {
     id: string;
     title: string;
     partner: string;
@@ -16,6 +16,10 @@ export interface Event {
     imageUrl: string;
     date?: Date | firebase.firestore.Timestamp;
     dayOfWeek: number;
-    isFavorite?: boolean;
     tags: string[];
+}
+
+export interface MyEvent extends EventData {
+    isFavorite: boolean;
+    isRegistered: boolean;
 }

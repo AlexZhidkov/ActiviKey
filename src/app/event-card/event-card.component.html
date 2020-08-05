@@ -13,7 +13,9 @@
         <p>{{event.description}}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>Register</button>
+        <button mat-button (click)="register()">
+            {{event.isRegistered ? 'Unregister' : 'Register'}}
+        </button>
         <span fxFlex></span>
         <button mat-icon-button (click)="favoriteClicked()">
             <mat-icon [color]="event.isFavorite ? 'accent':''">favorite</mat-icon>

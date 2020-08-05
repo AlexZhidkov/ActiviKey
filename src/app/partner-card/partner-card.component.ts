@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppService } from '../app.service';
-import { Event } from '../model/event';
+import { EventData } from '../model/event';
 import { Partner } from '../model/partner';
 
 @Component({
@@ -12,7 +12,7 @@ import { Partner } from '../model/partner';
 export class PartnerCardComponent implements OnInit {
   @Input() partner: Partner;
   showEvents: boolean;
-  events: Observable<Event[]>;
+  events: Observable<EventData[]>;
 
   constructor(
     public service: AppService
