@@ -17,6 +17,7 @@ export interface EventData {
     date?: Date | firebase.firestore.Timestamp;
     dayOfWeek: number;
     tags: string[];
+    openRegistration: string;
 }
 
 export interface MyEvent extends EventData {

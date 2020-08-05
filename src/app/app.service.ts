@@ -51,6 +51,16 @@ export class AppService {
   }
 
   registerForEvent(event: MyEvent): void {
+    this.auth.user.subscribe(user => {
+      const eventRegistrationsPath = `events/${event.id}/registrations/${event.openRegistration}/users`;
+      if (event.isRegistered) {
+        this.afs.collection<any>(eventRegistrationsPath)
+          .doc(user.uid)
+          .set({ name: user.displayName });
+      } else {
+        this.afs.doc<any>(`${eventRegistrationsPath}/${user.uid}`).delete();
+      }
+    });
   }
 
   getSettings(): Promise<UserSettings> {
