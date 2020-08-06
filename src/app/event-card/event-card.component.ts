@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AppService } from '../app.service';
 import { MyEvent } from '../model/event';
 
@@ -9,10 +10,17 @@ import { MyEvent } from '../model/event';
 })
 export class EventCardComponent implements OnInit {
   @Input() event: MyEvent;
+  showRegistrations: boolean;
+  registrations: any[];
 
-  constructor(public service: AppService) { }
+  constructor(
+    public service: AppService,
+    private afs: AngularFirestore,
+  ) { }
 
   ngOnInit(): void {
+    this.registrations = [];
+    this.showRegistrations = false;
   }
 
   favoriteClicked(): void {
@@ -23,5 +31,18 @@ export class EventCardComponent implements OnInit {
   register(): void {
     this.event.isRegistered = !this.event.isRegistered;
     this.service.registerForEvent(this.event);
+  }
+
+  showRegistrationsClicked(): void {
+    this.showRegistrations = !this.showRegistrations;
+    if (this.showRegistrations) {
+      this.afs.collection<any>(`/events/${this.event.id}/registrations/${this.event.openRegistration}/users`)
+        .valueChanges().subscribe(docs => {
+          this.registrations = docs;
+          if (!this.registrations.length) {
+            this.registrations = [{ name: 'Nobody has registered yet' }];
+          }
+        });
+    }
   }
 }

@@ -17,6 +17,9 @@
             {{event.isRegistered ? 'Unregister' : 'Register'}}
         </button>
         <span fxFlex></span>
+        <button mat-icon-button (click)="showRegistrationsClicked()">
+            <mat-icon>people</mat-icon>
+        </button>
         <button mat-icon-button (click)="favoriteClicked()">
             <mat-icon [color]="event.isFavorite ? 'accent':''">favorite</mat-icon>
         </button>
@@ -24,4 +27,7 @@
             <mat-icon>edit</mat-icon>
         </button>
     </mat-card-actions>
+    <mat-list *ngIf="showRegistrations" dense>
+        <mat-list-item *ngFor="let registration of registrations"> {{registration.name}} </mat-list-item>
+    </mat-list>
 </mat-card>
