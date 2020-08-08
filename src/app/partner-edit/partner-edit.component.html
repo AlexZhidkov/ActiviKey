@@ -21,6 +21,11 @@
                 (ngModelChange)="partnerDoc.update({imageUrl: $event})">
         </mat-form-field>
         <mat-form-field>
+            <input matInput type="text" name="video" placeholder="YouTube Video URL"
+                [ngModel]="(partner | async)?.videoYouTubeUrl"
+                (ngModelChange)="partnerDoc.update({videoYouTubeUrl: $event})">
+        </mat-form-field>
+        <mat-form-field>
             <textarea matInput rows="5" name="description" placeholder="Description"
                 [ngModel]="(partner | async)?.description" (ngModelChange)="partnerDoc.update({description: $event})">
                 </textarea>

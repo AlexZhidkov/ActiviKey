@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AppService } from '../app.service';
 import { MyEvent } from '../model/event';
 
@@ -16,6 +17,7 @@ export class EventCardComponent implements OnInit {
   constructor(
     public service: AppService,
     private afs: AngularFirestore,
+    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {

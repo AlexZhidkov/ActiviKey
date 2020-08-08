@@ -8,7 +8,10 @@
             {{event.placeName}}
         </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="event.imageUrl" alt="image">
+    <img *ngIf="event?.imageUrl" mat-card-image [src]="event.imageUrl" alt="image">
+    <iframe *ngIf="event?.videoYouTubeUrl" mat-card-image
+        [src]="sanitizer.bypassSecurityTrustResourceUrl(event.videoYouTubeUrl)" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen></iframe>
     <mat-card-content>
         <p>{{event.description}}</p>
     </mat-card-content>

@@ -14,6 +14,7 @@ export interface EventData {
     startTime: string;
     description: string;
     imageUrl: string;
+    videoYouTubeUrl: string;
     date?: Date | firebase.firestore.Timestamp;
     dayOfWeek: number;
     tags: string[];

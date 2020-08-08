@@ -10,6 +10,7 @@ export interface Partner {
     coordinates: firebase.firestore.GeoPoint;
     description: string;
     imageUrl: string;
+    videoYouTubeUrl: string;
     website: string;
     tags: string[];
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppService } from '../app.service';
 import { EventData } from '../model/event';
@@ -15,7 +16,8 @@ export class PartnerCardComponent implements OnInit {
   events: Observable<EventData[]>;
 
   constructor(
-    public service: AppService
+    public service: AppService,
+    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
